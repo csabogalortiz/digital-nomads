@@ -18,7 +18,7 @@ router.get('/users-list', (req, res, next) => {
 //User Profile
 router.get('/profile/:user_id', (req, res, next) => {
     res.send('hola soy profile')
-    //     const { user_id } = req.params
+    const { user_id } = req.params
 
     //     User
     //         .findById(user_id)
