@@ -1,32 +1,53 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
-require("dotenv").config();
 
-// ℹ️ Connects to the database
+require("dotenv").config();
 require("./db");
 
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
 const express = require("express");
 
-// Handles the handlebars
-// https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
 
 const app = express();
 
-// ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
-// default value for title local
-const capitalize = require("./utils/capitalize");
-const projectName = "DigitalNomads";
+require('./config/session.config')(app)   // session setup
 
-app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
+const capitalize = require("./utils/capitalize");
+const projectName = "DN";
+
+app.locals.appTitle = `${(projectName)}`;
 
 // 👇 Start handling routes here
+
+// Index/ Home
 const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);
+
+
+// // Places Routes 
+// const placesRouter = require('./routes/places.routes')
+// app.use("/places", placesRouter)
+
+// // Map Routes - no se 
+// const mapsRouter = require('./routes/map.routes')
+// app.use("/maps", mapsRouter)
+
+// // API Routes 
+// const apiRouter = require("./routes/api.routes")
+// app.use("/api", apiRouter)
+
+// Auth routes
+const authRouter = require("./routes/auth.routes");
+app.use("/auth", authRouter);
+
+
+// // Users Routes 
+const usersRouter = require("./routes/users.routes")
+app.use("/user", usersRouter)
+
+
+require("./error-handling")(app);
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
