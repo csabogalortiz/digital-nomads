@@ -24,24 +24,24 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);
 
 
-// // Places Routes 
-// const placesRouter = require('./routes/places.routes')
-// app.use("/places", placesRouter)
+// Places Routes 
+const placesRouter = require('./routes/places.routes')
+app.use("/places", placesRouter)
 
-// // Map Routes - no se 
-// const mapsRouter = require('./routes/map.routes')
-// app.use("/maps", mapsRouter)
+// // Map Routes - no se
+const mapsRouter = require('./routes/map.routes')
+app.use("/explore", mapsRouter)
 
-// // API Routes 
-// const apiRouter = require("./routes/api.routes")
-// app.use("/api", apiRouter)
+// API Routes 
+const apiRouter = require("./routes/api.routes")
+app.use("/api", apiRouter)
 
-// Auth routes
+// Auth Routes
 const authRouter = require("./routes/auth.routes");
 app.use("/auth", authRouter);
 
 
-// // Users Routes 
+//  Users Routes 
 const usersRouter = require("./routes/users.routes")
 app.use("/user", usersRouter)
 
