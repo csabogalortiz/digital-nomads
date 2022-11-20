@@ -40,6 +40,7 @@ router.post("/log-in", isLoggedOut, (req, res, next) => {
     User
         .findOne({ email })
         .then(user => {
+            console.log({ user })
             if (!user) {
                 res.render('auth/login', { errorMessage: 'Email not found' })
                 return
@@ -55,8 +56,8 @@ router.post("/log-in", isLoggedOut, (req, res, next) => {
 })
 
 // Logout
-router.post('/log-out', (req, res, next) => {
-    req.session.destroy(() => res.redirect('/log-in'))
+router.get('/log-out', (req, res, next) => {
+    req.session.destroy(() => res.redirect('/'))
 })
 
 module.exports = router;

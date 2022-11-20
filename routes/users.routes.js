@@ -9,87 +9,70 @@ router.get('/users-list', (req, res, next) => {
     // res.send('hola soy list')
     User
         .find()
-        .then(users => {
-            res.render('user/users-list', { users })
+        .then(nomads => {
+            res.render('user/users-list', { nomads })
         })
         .catch(err => console.log(err))
 })
 
-//User Profile
+//Nomad Profile
 router.get('/profile/:user_id', (req, res, next) => {
-    res.send('hola soy profile')
+    // res.send('hola soy profile')
     const { user_id } = req.params
+    // console.log(req.session.currentUser)
+    User
+        .findById(user_id)
+        .then(nomad => {
+            console.log({
+                isNOMAD: req.session.currentUser.role
+            })
+            res.render('user/profile', {
+                nomad,
+                isADMIN: req.session.currentUser.role === 'ADMIN',
+                isAA: req.session.currentUser.role === 'AA',
+                isNOMAD: req.session.currentUser.role === 'NOMAD'
+            })
 
-    //     User
-    //         .findById(user_id)
-    //         .then(user => {
-    //             console.log({
-    //                 isNOMAD: req.session.currentUser.role
-    //             })
-    //             res.render('user/profile', {
-    //                 user,
-    //                 isADMIN: req.session.currentUser.role === 'ADMIN',
-    //                 isAA: req.session.currentUser.role === 'AA',
-    //                 isNOMAD: req.session.currentUser.role === 'NOMAD'
-    //             })
-    //                 .catch(err => console.log(err))
-    //         })
+        })
+        .catch(err => console.log(err))
 })
 
-// //Edit User (render)
-// router.get('/profile/:user_id/edit', (req, res, next) => {
-//     // res.send('soy edit')
-//     const { user_id } = req.params
+// Edit Nomad (render)
+router.get('/profile/:user_id/edit', (req, res, next) => {
+    // res.send('soy edit')
+    const { user_id } = req.params
 
-//     User
-//         .findById(user_id)
-//         .then(user => {
-//             res.render('user/edit-user-profile', user)
-//         })
-//         .catch(err => console.log(err))
-// })
+    User
+        .findById(user_id)
+        .then(nomad => {
+            res.render('user/edit-user-profile', nomad)
+        })
+        .catch(err => console.log(err))
+})
 
-// // // Edit User (handle)
-// router.post('/profile/:user_id/edit', (req, res, next) => {
-//     // console.log('entro aqui')
-//     const { name, username, email, profileImg, bio, links, savedPlaces } = req.body
-//     const { user_id } = req.params
-// })
+// // // Edit Nomad (handle)
+router.post('/profile/:user_id/edit', (req, res, next) => {
+    const { name, username, email, profileImg, bio, links, savedPlaces } = req.body
+    const { user_id } = req.params
 
-
-
-
-
-
-
-// router.post('/:user_id/edit', (req, res) => {
-//     // console.log('entro aqui')
-//     // res.send('hola')
-
-//     const { username, email, profileImg, description } = req.body
-//     const { user_id } = req.params
-
-//     User
-//         .findOneAndUpdate(user_id, { username, email, profileImg, description })
-//         .then(() => res.redirect(`/students/profile/${user_id}`))
-//         .catch(err => console.log(err))
-// })
+    User
+        .findByIdAndUpdate(user_id, { name, username, email, profileImg, bio, links, savedPlaces })
+        .then(() => res.redirect('user/profile/${user_id}'))
+        .catch(err => console.log(err))
+})
 
 
-// // Delete Student (handle)
+//Delete Nomad (handle)
 
-// router.post('/:user_id/delete', (req, res) => {
+router.post('/:user_id/delete', (req, res, next) => {
 
-//     const { user_id } = req.params
+    const { user_id } = req.params
 
-//     User
-
-//         .findByIdAndDelete(user_id)
-//         .then(() => res.redirect('/students/students-list'))
-//         .catch(err => console.log(err))
-
-// });
-
+    User
+        .findByIdAndDelete(user_id)
+        .then(() => res.redirect('user/users-list'))
+        .catch(err => console.log(err))
+})
 
 
 module.exports = router
