@@ -13,11 +13,12 @@ router.get('/users-list', (req, res, next) => {
         .catch(err => console.log(err))
 })
 //Nomad Profile
-router.get('/profile', (req, res, next) => {
+router.get('/profile/:user_id', (req, res, next) => {
     // res.send('hola soy profile')
+    const { user_id } = req.params
     // console.log(req.session.currentUser)
     User
-        .findById(req.session.currentUser._id)
+        .findById(user_id)
         .then(nomad => {
             console.log({
                 isNOMAD: req.session.currentUser.role
@@ -33,8 +34,9 @@ router.get('/profile', (req, res, next) => {
 })
 // Edit Nomad (render)
 router.get('/profile/:user_id/edit', (req, res, next) => {
-    // res.send('soy edit')
+
     const { user_id } = req.params
+    // res.send('soy edit')
     User
         .findById(user_id)
         .then(nomad => {
@@ -56,7 +58,7 @@ router.post('/:user_id/delete', (req, res, next) => {
     const { user_id } = req.params
     User
         .findByIdAndDelete(user_id)
-        .then(() => res.redirect('user/users-list'))
+        .then(() => res.redirect('/'))
         .catch(err => console.log(err))
 })
 module.exports = router

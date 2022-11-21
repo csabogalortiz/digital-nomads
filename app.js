@@ -19,7 +19,17 @@ const projectName = "DN";
 
 app.locals.appTitle = `${(projectName)}`;
 
-// req.session.currentUser -como acceder a esto desde cualquier lado 
+app.use((req, res, next) => {
+    if (req.session.currentUser) {
+        app.locals.userName = req.session.currentUser.username
+        app.locals.id = req.session.currentUser._id
+        console.log(app.locals.userName, 'soy el usuario conectado')
+    } else {
+        app.locals.userName = null
+        app.locals.id = null
+    }
+    next()
+})
 
 
 // 👇 Start handling routes here

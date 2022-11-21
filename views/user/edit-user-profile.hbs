@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <h1>Edit Profile</h1>
             <hr>
-            <form action="/auth/sign-up" method="POST">
+            <form action="/user/edit-user-profile" method="POST">
                 <div class="mb-3 row">
                     <div class="col">
                         <label for="emailInput" class="form-label"> Email</label>
@@ -36,7 +36,7 @@
                     <button type="submit" class="btn btn-dark block">Edit</button>
                 </div>
                 <div class="d-grid gap-2">
-                    <form action="/{{nomad._id}}/delete" method="POST" style="display: inline">
+                    <form action="/{{id}}/delete" method="POST" style="display: inline">
                         <input type="submit" value="Eliminar" class="btn btn-danger">
                     </form>
                 </div>
