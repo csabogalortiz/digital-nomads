@@ -15,7 +15,7 @@ function isLoggedOut(req, res, next) {
     if (!req.session.currentUser) {
         next()
     } else {
-        res.redirect('/')
+        res.redirect('/home')
     }
 }
 // Esta solo se usa cuando el usuario ya esta logged in y le da dos veces al register por ejemplo 

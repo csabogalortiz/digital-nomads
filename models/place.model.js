@@ -29,10 +29,10 @@ const placeSchema = new Schema({
     type: String,
     default: 'https://www.bedfordcentre.com/plugins/noveldesign-store-directory/images/default-shop.jpg'
   },
-  owner: [{
+  owner: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-  }],
+  },
 },
   {
     timestamps: true

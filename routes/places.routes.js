@@ -3,7 +3,7 @@ const router = express.Router();
 const { findByIdAndUpdate, findByIdAndDelete } = require("./../models/Place.model")
 const Place = require('./../models/Place.model')
 
-// Place list - Toca hacerlo diferene por el tema de la api 
+// Place list - Toca hacerlo diferente por el tema de la api 
 
 router.get('/list', (req, res, next) => {
     // res.send("Place List goes here")

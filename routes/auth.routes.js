@@ -42,10 +42,10 @@ router.post("/log-in", isLoggedOut, (req, res, next) => {
         .then(user => {
             console.log({ user })
             if (!user) {
-                res.render('auth/login', { errorMessage: 'Email not found' })
+                res.render('auth/log-in', { errorMessage: 'Email not found' })
                 return
             } else if (bcrypt.compareSync(userPwd, user.password) === false) {
-                res.render('auth/login', { errorMessage: 'Wrong Password' })
+                res.render('auth/log-in', { errorMessage: 'Wrong Password' })
                 return
             } else {
                 req.session.currentUser = user

@@ -1,8 +1,9 @@
 const express = require('express');
+const { isLoggedOut } = require('../middleware/route-guard');
 const router = express.Router();
 
 /* GET Log in page */
-router.get("/", (req, res, next) => {
+router.get("/", isLoggedOut, (req, res, next) => {
   res.render("index");
 });
 

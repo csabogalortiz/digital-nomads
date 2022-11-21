@@ -28,10 +28,9 @@ const userSchema = new Schema({
     default: 'Hi! Im a Digital Nomad'
   },
 
-  links: {
+  links: [{
     type: String,
-    required: false
-  },
+  }],
 
   role: {
     type: String,
@@ -39,12 +38,11 @@ const userSchema = new Schema({
     default: 'NOMAD'
   },
 
-  savedPlaces: [{
-    id: {
+  favPlaces: [
+    {
       type: Schema.Types.ObjectId,
       ref: 'Place',
-    },
-  }
+    }
   ]
 },
 
