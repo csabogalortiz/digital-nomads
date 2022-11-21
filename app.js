@@ -13,9 +13,13 @@ require("./config")(app);
 require('./config/session.config')(app)   // session setup
 
 const capitalize = require("./utils/capitalize");
+
+// Global Variables
 const projectName = "DN";
 
 app.locals.appTitle = `${(projectName)}`;
+
+// req.session.currentUser -como acceder a esto desde cualquier lado 
 
 
 // 👇 Start handling routes here

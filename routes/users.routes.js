@@ -13,12 +13,11 @@ router.get('/users-list', (req, res, next) => {
         .catch(err => console.log(err))
 })
 //Nomad Profile
-router.get('/profile/:user_id', (req, res, next) => {
+router.get('/profile', (req, res, next) => {
     // res.send('hola soy profile')
-    const { user_id } = req.params
     // console.log(req.session.currentUser)
     User
-        .findById(user_id)
+        .findById(req.session.currentUser._id)
         .then(nomad => {
             console.log({
                 isNOMAD: req.session.currentUser.role
