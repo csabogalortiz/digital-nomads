@@ -49,6 +49,7 @@ router.post("/log-in", isLoggedOut, (req, res, next) => {
                 return
             } else {
                 req.session.currentUser = user
+
                 res.redirect('/home')
             }
         })

@@ -17,6 +17,7 @@ const projectName = "DN";
 
 app.locals.appTitle = `${(projectName)}`;
 
+
 // 👇 Start handling routes here
 
 // Index/ Home
