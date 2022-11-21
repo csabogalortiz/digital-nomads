@@ -10,7 +10,7 @@ router.get('/list', (req, res, next) => {
     Place
         .find()
         .then(places => {
-            res.render("places/list-places", { places })
+            res.render("places/list", { places })
         })
         .catch(err => console.log(err))
 })
@@ -24,7 +24,7 @@ router.get('/create', (req, res, next) => {
 
 // Create Place - Form -  (hanlde)  
 router.post('/create', (req, res, next) => {
-    const { name, type, description, latitude, longitude } = req.body
+    const { name, type, latitude, longitude } = req.body
 
     const location = {
         type: 'Point',
@@ -32,7 +32,7 @@ router.post('/create', (req, res, next) => {
     }
 
     Place
-        .create({ name, type, description, location })
+        .create({ name, type, location })
         .then(() => {
             res.redirect('/explore/places')
         })
