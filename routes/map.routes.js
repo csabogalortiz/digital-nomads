@@ -6,5 +6,8 @@ router.get('/places', (req, res, next) => {
     res.render('explore/map')
 })
 
+
+
+
 module.exports = router
 

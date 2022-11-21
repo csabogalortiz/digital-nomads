@@ -3,16 +3,20 @@
 let exploreMap
 
 function initMap() {
+
+    let params = (new URL(document.location)).searchParams
+    let type = params.get('type')
+
     renderMap()
-    getPlaces()
+    getPlaces(type)
 }
 
 
 // Get Places For Markers
 
-function getPlaces() {
+function getPlaces(type) {
     axios
-        .get('/api/places')
+        .get(`/api/places?type=${type}`)
         .then(response => setMarkers(response.data))
         .catch(err => console.log(err))
 }
