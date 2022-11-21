@@ -10,7 +10,7 @@ const placeSchema = new Schema({
 
   type: {
     type: String,
-    enum: ['Focusing', 'Networking', "Focus&Chill"]
+    enum: ['focus', 'network', 'chill']
   },
 
 

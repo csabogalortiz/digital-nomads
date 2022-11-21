@@ -2,13 +2,43 @@
 
     <h1>Explore The best Places On the Map</h1>
 
+
+    <div class="mb-3">
+
+        <h3>Filter</h3>
+
+        <a href="?type=focus" class="btn btn-info">Focus</a>
+        <a href="?type=networking" class="btn btn-info">Network</a>
+        <a href="?type=chill" class=" btn btn-info">Chill</a>
+
+    </div>
+
     <figure id="exploreMap"></figure>
 
     <a href="/" class="btn btn-dark">Back to Homepage</a>
     <a href="/places/create" class="btn btn-dark">Add a New Place!</a>
 </div>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/exploreMap.js"></script>
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJjUzeG0WQ_oEe9YaRoUNWI-lhWdPB4oE&callback=initMap"></script>
+
+<ul id="places"></ul>
+
+<script>
+
+
+    fetch('https://maps.googleapis.com/maps/api/js?key=AIzaSyAJjUzeG0WQ_oEe9YaRoUNWI-lhWdPB4oE&callback=initMap?type=Focus')
+        .then(res => res.json())
+        .then(coastersArray => {
+            let code = ''
+            coastersArray.forEach(elm => code += `<li>${elm.name}</li>`)
+            document.querySelector('#places').innerHTML = code
+        })
+        .catch(err => console.log(err))
+
+
+</script>
