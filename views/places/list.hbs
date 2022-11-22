@@ -16,16 +16,13 @@
                 <div class="row">
                     {{!-- <a href="XXXXX" class="btn btn-dark">Check Details</a> --}}
                     <a href="/places/edit/{{id}}" class="btn btn-dark">Edit Place</a>
-
-
                 </div>
-
             </div>
-
-            {{/each}}
             <form action="/places/delete/{{id}}" method="POST">
-                <input type="submit" value="Delete Place" class="btn btn-danger">
+                <input type="submit" value="Delete" class="btn btn-danger">
             </form>
+            {{/each}}
+
 
 
         </div>

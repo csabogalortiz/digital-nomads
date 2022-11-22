@@ -77,6 +77,8 @@ router.post("/edit/:id", uploader.single('imageField'), (req, res, next) => {
 router.post('/delete/:id', (req, res, next) => {
 
     const { id: place_id } = req.params
+
+    Place
         .findByIdAndDelete(place_id)
         .then(() => {
 
