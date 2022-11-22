@@ -3,7 +3,7 @@
 </div>
 
 <div class="container">
-    <form action="/places/create" method="POST">
+    <form action="/places/create" method="POST" enctype="multipart/form-data">
         <div class="form-row">
             <div class="form-group mb-2">
                 <label for="name">How is this place called?</label>
@@ -30,6 +30,11 @@
                         <input type="text" class="form-control" id="type" name="longitude">
                     </div>
                 </div>
+            </div>
+            <div class="mb-3">
+                <label for="placeImg" class="form-label">Add a Place Picture</label>
+                <input type="file" class="form-control" id="placeImg" name="imageField">
+                <div class="form-text">Paste the URL of the picture you want to use.</div>
             </div>
 
             <div class="mb-3 mb-2">

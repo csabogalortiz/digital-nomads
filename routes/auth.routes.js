@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const uploader = require('../config/uploader.config')
 const User = require("../models/User.model")
 const saltRounds = 10
-const bcrypt = require('bcryptjs')
+const bcryptjs = require('bcryptjs')
 const { isLoggedOut } = require('./../middleware/route-guard');
 
 // Signup
@@ -13,13 +14,13 @@ router.get("/sign-up", isLoggedOut, (req, res, next) => {
 
 })
 
-router.post("/sign-up", isLoggedOut, (req, res, next) => {
-    const { userPwd } = req.body
+router.post("/sign-up", isLoggedOut, uploader.single("imageField"), (req, res, next) => {
+    const { password } = req.body
 
-    bcrypt
+    bcryptjs
         .genSalt(saltRounds)
-        .then(salt => bcrypt.hash(userPwd, salt))
-        .then(hashedPassword => User.create({ ...req.body, password: hashedPassword }))
+        .then(salt => bcryptjs.hash(password, salt))
+        .then(hashedPassword => User.create({ ...req.body, profileImg: req.file.path, password: hashedPassword }))
         .then(createdUser => res.redirect('/'))
         .catch(error => next(error))
 
@@ -35,7 +36,7 @@ router.get("/log-in", isLoggedOut, (req, res, next) => {
 
 router.post("/log-in", isLoggedOut, (req, res, next) => {
 
-    const { email, userPwd } = req.body
+    const { email, password } = req.body
 
     User
         .findOne({ email })
@@ -44,7 +45,7 @@ router.post("/log-in", isLoggedOut, (req, res, next) => {
             if (!user) {
                 res.render('auth/log-in', { errorMessage: 'Email not found' })
                 return
-            } else if (bcrypt.compareSync(userPwd, user.password) === false) {
+            } else if (bcryptjs.compareSync(password, user.password) === false) {
                 res.render('auth/log-in', { errorMessage: 'Wrong Password' })
                 return
             } else {

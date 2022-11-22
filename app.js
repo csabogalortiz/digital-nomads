@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 require("./db");
 
@@ -31,40 +30,8 @@ app.use((req, res, next) => {
     next()
 })
 
-
-// 👇 Start handling routes here
-
-// Index/ Home
-const indexRoutes = require("./routes/index.routes");
-app.use("/", indexRoutes);
-
-
-// Places Routes 
-const placesRouter = require('./routes/places.routes')
-app.use("/places", placesRouter)
-
-// // Map Routes - no se
-const mapsRouter = require('./routes/map.routes')
-app.use("/explore", mapsRouter)
-
-// API Routes 
-const apiRouter = require("./routes/api.routes")
-app.use("/api", apiRouter)
-
-// Auth Routes
-const authRouter = require("./routes/auth.routes");
-app.use("/auth", authRouter);
-
-
-//  Users Routes 
-const usersRouter = require("./routes/users.routes")
-app.use("/user", usersRouter)
-
-
+require('./routes')(app)
 require("./error-handling")(app);
-
-
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
 module.exports = app;

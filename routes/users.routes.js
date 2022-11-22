@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('./../models/User.model')
-const { isLoggedIn } = require('./../middleware/route-guard')
+const User = require('../models/User.model')
+const uploader = require('./../config/uploader.config')
 //Nomads List
 router.get('/users-list', (req, res, next) => {
     // res.send('hola soy list')
@@ -45,16 +45,19 @@ router.get('/profile/:user_id/edit', (req, res, next) => {
         .catch(err => console.log(err))
 })
 // // // Edit Nomad (handle)
-router.post('/profile/:user_id/edit', (req, res, next) => {
+router.post('/profile/:user_id/edit', uploader.single('imageField'), (req, res, next) => {
+
     const { name, username, email, profileImg, bio, links, savedPlaces } = req.body
     const { user_id } = req.params
+    // console.log('soy edit', req.body)
     User
-        .findByIdAndUpdate(user_id, { name, username, email, profileImg, bio, links, savedPlaces })
-        .then(() => res.redirect('user/profile/${user_id}'))
+        .findByIdAndUpdate(user_id, { name, username, email, profileImg: req.file.path, bio, links, savedPlaces })
+        .then(() => res.redirect(`/user/profile/${user_id}`))
         .catch(err => console.log(err))
 })
 //Delete Nomad (handle)
-router.post('/:user_id/delete', (req, res, next) => {
+router.post('/profile/:user_id/delete', (req, res, next) => {
+    // console.log('soy delete')
     const { user_id } = req.params
     User
         .findByIdAndDelete(user_id)

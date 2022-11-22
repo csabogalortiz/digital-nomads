@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { findByIdAndUpdate, findByIdAndDelete } = require("./../models/Place.model")
-const Place = require('./../models/Place.model')
+const uploader = require('./../config/uploader.config')
+const { findByIdAndUpdate, findByIdAndDelete } = require("../models/Place.model")
+const Place = require('../models/Place.model')
 
 // Place list - Toca hacerlo diferente por el tema de la api 
 
@@ -23,7 +24,7 @@ router.get('/create', (req, res, next) => {
 })
 
 // Create Place - Form -  (hanlde)  
-router.post('/create', (req, res, next) => {
+router.post('/create', uploader.single('imageField'), (req, res, next) => {
     const { name, type, latitude, longitude } = req.body
 
     const location = {
@@ -56,7 +57,7 @@ router.get("/edit/:id", (req, res, next) => {
 
 // Edit Place - Form - (handle)
 
-router.post("/edit/:id", (req, res, next) => {
+router.post("/edit/:id", uploader.single('imageField'), (req, res, next) => {
 
     const { id: place_id } = req.params
     const { name, type, description } = req.body
@@ -64,14 +65,14 @@ router.post("/edit/:id", (req, res, next) => {
     Place
         .findByIdAndUpdate(place_id, { name, type, description })
         .then(() => {
-            res.redirect('/explore/map')
+            res.redirect('/places/list')
         })
         .catch(err => console.log(err))
 })
 
 // Delete 
 
-router.post('/delete/:id', (req, res, next) => {
+router.post('/places/delete/:id', (req, res, next) => {
 
     const { id: place_id } = req.params
         .findByIdAndDelete(place_id)
