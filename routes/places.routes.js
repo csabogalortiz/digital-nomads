@@ -18,8 +18,6 @@ router.get('/list', (req, res, next) => {
 })
 
 
-
-
 // Create Place - Form -  (render)  
 router.get('/create', (req, res, next) => {
     res.render('places/create')

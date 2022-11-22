@@ -40,7 +40,7 @@ router.post("/log-in", isLoggedOut, (req, res, next) => {
     User
         .findOne({ email })
         .then(user => {
-            console.log({ user })
+            // console.log({ user })
             if (!user) {
                 res.render('auth/log-in', { errorMessage: 'Email not found' })
                 return

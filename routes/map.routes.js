@@ -4,13 +4,13 @@ const Place = require('./../models/Place.model');
 
 //  Map 
 router.get('/places', (req, res, next) => {
+    console.log('llega algo aquii?????', req.query)
     Place
-        .find()
+        .find(req.query)
         .then(places => {
-            res.render("places/list", { places })
+            res.render('explore/map', { places })
         })
-    //     .catch(err => console.log(err))
-    res.render('explore/map')
+        .catch(err => console.log(err))
 })
 
 
