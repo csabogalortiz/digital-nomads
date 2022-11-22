@@ -14,7 +14,7 @@ const placeSchema = new Schema({
   },
 
 
-  decripion: {
+  decription: {
     type: String,
     required: false
   },

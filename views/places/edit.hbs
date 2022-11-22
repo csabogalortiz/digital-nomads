@@ -6,13 +6,13 @@
     <form action="/places/edit/{{_id}}" method="POST" enctype="multipart/form-data">
         <div class="form-row">
             <div class="form-group mb-2">
-                <label for="inputAddress">How is this place called?</label>
-                <input type="text" class="form-control" id="inputAddress" value="{{name}}">
+                <label for="name">How is this place called?</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{name}}">
             </div>
 
             <div class="form-group mb-2">
                 <label for="inputState">This place is perfect for...</label>
-                <select id="inputState" class="form-control">
+                <select id="inputState" class="form-control" name="type">
                     <option>Focusing</option>
                     <option>Nerworking</option>
                     <option>Focus&Chill</option>
@@ -43,7 +43,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-dark">Edit Place</button>
+            <button type="submit" class="btn btn-dark">Edit</button>
 
     </form>
 

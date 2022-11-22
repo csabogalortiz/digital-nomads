@@ -15,13 +15,13 @@ router.get("/sign-up", isLoggedOut, (req, res, next) => {
 })
 
 router.post("/sign-up", isLoggedOut, uploader.single("imageField"), (req, res, next) => {
-    const { password } = req.body
+    const { password, name, username, email, profileImg, bio, links, savedPlaces } = req.body
 
     bcryptjs
         .genSalt(saltRounds)
         .then(salt => bcryptjs.hash(password, salt))
-        .then(hashedPassword => User.create({ ...req.body, profileImg: req.file.path, password: hashedPassword }))
-        .then(createdUser => res.redirect('/'))
+        .then(hashedPassword => User.create({ name, username, email, bio, links, savedPlaces, profileImg: req.file.path, password: hashedPassword }))
+        .then(() => res.redirect('/'))
         .catch(error => next(error))
 
 })

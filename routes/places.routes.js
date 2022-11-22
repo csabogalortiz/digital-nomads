@@ -33,7 +33,7 @@ router.post('/create', uploader.single('imageField'), (req, res, next) => {
     }
 
     Place
-        .create({ name, type, location })
+        .create({ name, type, location, placeImg: req.file.path })
         .then(() => {
             res.redirect('/explore/places')
         })
@@ -61,6 +61,8 @@ router.post("/edit/:id", uploader.single('imageField'), (req, res, next) => {
 
     const { id: place_id } = req.params
     const { name, type, description } = req.body
+    console.log({ name, type, description })
+    console.log(req.body)
 
     Place
         .findByIdAndUpdate(place_id, { name, type, description })
@@ -72,7 +74,7 @@ router.post("/edit/:id", uploader.single('imageField'), (req, res, next) => {
 
 // Delete 
 
-router.post('/places/delete/:id', (req, res, next) => {
+router.post('/delete/:id', (req, res, next) => {
 
     const { id: place_id } = req.params
         .findByIdAndDelete(place_id)
