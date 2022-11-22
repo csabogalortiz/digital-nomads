@@ -61,4 +61,55 @@ router.post('/:user_id/delete', (req, res, next) => {
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
 })
+
+
+// // Create Place (render)
+
+// router.get('/my-places', isLoggedIn, (req, res) => {
+
+//     // res.send("holi")
+//     Place
+//         .find({ owner: req.session.currentUser._id })
+//         .select({ name: 1 })
+//         .then(places => {
+//             res.render('user/my-places/', { places })
+//         })
+//         .catch(err => console.log(err))
+// })
+
+
+// // Create Place (post)
+// router.post('/my-places', isLoggedIn, (req, res) => {
+
+
+//     // res.send("holi")
+//     User
+//         .findbyId(req.session.currentUser._id )
+//         .then(places => {
+
+//             res.render('places/list', { places })
+//         })
+//         .catch(err => console.log(err))
+// })
+
+
+
+// Update Created  places list 
+
+// router.post("/updateCreatedPlaces").put(function (req, res) {
+//         .updateOne(
+//         { id: "req.session.currentUser._id" },
+//         { $push: { createdPlaces: [] } },
+//         function (err, result) {
+//             if (err) {
+//                 res.send(err);
+//             } else {
+//                 res.send(result);
+//             }
+//         }
+//     );
+// });
+
+
+
 module.exports = router

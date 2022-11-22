@@ -38,7 +38,7 @@ const userSchema = new Schema({
     default: 'NOMAD'
   },
 
-  favPlaces: [
+  createdPlaces: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Place',
