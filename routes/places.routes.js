@@ -19,21 +19,6 @@ router.get('/list', (req, res, next) => {
 
 
 
-// // Place details
-// router.get("/:id", (req, res) => {
-//     const { id: place_id } = req.params
-
-//     Movie.findById(place_id)
-//         .populate("owner")
-//         .then((movie) => {
-//             res.render("movies/movie-details", movie);
-//         })
-//         .catch((err) => console.log(err));
-// });
-
-
-
-
 
 // Create Place - Form -  (render)  
 router.get('/create', (req, res, next) => {

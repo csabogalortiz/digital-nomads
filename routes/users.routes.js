@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('./../models/User.model')
 const { isLoggedIn } = require('./../middleware/route-guard')
+
+
+
 //Nomads List
 router.get('/users-list', (req, res, next) => {
     // res.send('hola soy list')
