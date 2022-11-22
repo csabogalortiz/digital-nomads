@@ -23,6 +23,7 @@
 <div>
     <h1>Place list</h1>
 
+
     {{#each places}}
 
     <h3>{{name}}</h3>
@@ -30,8 +31,10 @@
 </div>
 <div>
     <a href="/places/edit/{{id}}" class="btn btn-dark">Edit Place</a>
-    <form action="places/delete/{{id}}" method="POST">
-        <input type="submit" value="Delete Place" class="btn btn-danger">
+
+
+    <form action="/user/{{../user}}/fav-places/{{id}}" method="POST">
+        <input type="submit" value="Save Place" class="btn btn-info">
     </form>
 
 </div>
@@ -39,11 +42,7 @@
 </div>
 
 {{/each}}
-
-
 </div>
-
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

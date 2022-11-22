@@ -43,6 +43,12 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Place',
     }
+  ],
+  favPlaces: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Place',
+    }
   ]
 },
 

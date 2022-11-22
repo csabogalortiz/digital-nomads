@@ -8,7 +8,7 @@ router.get('/places', (req, res, next) => {
     Place
         .find(req.query)
         .then(places => {
-            res.render('explore/map', { places })
+            res.render('explore/map', { user: req.session.currentUser._id, places })
         })
         .catch(err => console.log(err))
 })

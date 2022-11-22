@@ -36,11 +36,12 @@ router.get("/log-in", isLoggedOut, (req, res, next) => {
 router.post("/log-in", isLoggedOut, (req, res, next) => {
 
     const { email, userPwd } = req.body
+    console.log({ email })
 
     User
         .findOne({ email })
         .then(user => {
-            // console.log({ user })
+            console.log({ user })
             if (!user) {
                 res.render('auth/log-in', { errorMessage: 'Email not found' })
                 return

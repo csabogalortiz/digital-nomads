@@ -15,6 +15,7 @@ router.get('/users-list', (req, res, next) => {
         })
         .catch(err => console.log(err))
 })
+
 //Nomad Profile
 router.get('/profile/:user_id', (req, res, next) => {
     // res.send('hola soy profile')
@@ -65,53 +66,30 @@ router.post('/:user_id/delete', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+// Fav Places
+router.get('/:user_id/fav-places', (req, res, next) => {
 
-// // Create Place (render)
-
-// router.get('/my-places', isLoggedIn, (req, res) => {
-
-//     // res.send("holi")
-//     Place
-//         .find({ owner: req.session.currentUser._id })
-//         .select({ name: 1 })
-//         .then(places => {
-//             res.render('user/my-places/', { places })
-//         })
-//         .catch(err => console.log(err))
-// })
-
-
-// // Create Place (post)
-// router.post('/my-places', isLoggedIn, (req, res) => {
+    const { user_id } = req.params
+    // res.send('soy edit')
+    User
+        .findById(user_id)
+        .populate('favPlaces')
+        .then(nomad => {
+            console.log(nomad)
+            res.render('user/fav', nomad)
+        })
+        .catch(err => console.log(err))
 
 
-//     // res.send("holi")
-//     User
-//         .findbyId(req.session.currentUser._id )
-//         .then(places => {
+})
 
-//             res.render('places/list', { places })
-//         })
-//         .catch(err => console.log(err))
-// })
-
-
-
-// Update Created  places list 
-
-// router.post("/updateCreatedPlaces").put(function (req, res) {
-//         .updateOne(
-//         { id: "req.session.currentUser._id" },
-//         { $push: { createdPlaces: [] } },
-//         function (err, result) {
-//             if (err) {
-//                 res.send(err);
-//             } else {
-//                 res.send(result);
-//             }
-//         }
-//     );
-// });
+router.post('/:user_id/fav-places/:place_id', (req, res, next) => {
+    const { user_id } = req.params
+    const { place_id } = req.params
+    User
+        .findByIdAndUpdate(user_id, { "$addToSet": { "favPlaces": place_id } })
+        .then(() => res.redirect('/places/list'))
+})
 
 
 
