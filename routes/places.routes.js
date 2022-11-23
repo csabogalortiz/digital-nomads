@@ -26,7 +26,7 @@ router.get('/create', (req, res, next) => {
 // Create Place - Form -  (hanlde)  
 router.post('/create', uploader.single('imageField'), (req, res, next) => {
     const { name, type, latitude, longitude } = req.body
-
+    const owner = req.session.currentUser._id
     const location = {
         type: 'Point',
         coordinates: [latitude, longitude]
@@ -86,6 +86,18 @@ router.post('/delete/:id', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+// Owned place list
+router.get('/my-places', isLoggedIn, (req, res) => {
+
+    // res.send("holi")
+    Place
+        .find({ owner: req.session.currentUser._id })
+        // .select({ name: 1 })
+        .then(places => {
+            res.render('places/my-places', { places })
+        })
+        .catch(err => console.log(err))
+})
 
 
 module.exports = router

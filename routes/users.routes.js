@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User.model')
 const uploader = require('./../config/uploader.config')
+const { isLoggedIn } = require('./../middleware/route-guard')
+
+
 //Nomads List
 router.get('/users-list', (req, res, next) => {
     // res.send('hola soy list')
@@ -12,6 +15,7 @@ router.get('/users-list', (req, res, next) => {
         })
         .catch(err => console.log(err))
 })
+
 //Nomad Profile
 router.get('/profile/:user_id', (req, res, next) => {
     // res.send('hola soy profile')
@@ -64,4 +68,32 @@ router.post('/profile/:user_id/delete', (req, res, next) => {
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
 })
+
+// Fav Places
+router.get('/:user_id/fav-places', (req, res, next) => {
+
+    const { user_id } = req.params
+    // res.send('soy edit')
+    User
+        .findById(user_id)
+        .populate('favPlaces')
+        .then(nomad => {
+            console.log(nomad)
+            res.render('user/fav', nomad)
+        })
+        .catch(err => console.log(err))
+
+
+})
+
+router.post('/:user_id/fav-places/:place_id', (req, res, next) => {
+    const { user_id } = req.params
+    const { place_id } = req.params
+    User
+        .findByIdAndUpdate(user_id, { "$addToSet": { "favPlaces": place_id } })
+        .then(() => res.redirect('/places/list'))
+})
+
+
+
 module.exports = router

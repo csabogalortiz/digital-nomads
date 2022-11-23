@@ -1,1 +1,14 @@
-<h1> Welcome {{nomad.username}}</h1>
+<div class="row align-items-center">
+
+    <div class="col">
+        <h1> Welcome {{nomad.username}}</h1>
+        <a href="/places/my-places" class="btn btn-dark">Your Places!</a>
+        <a href="/user/{{id}}/fav-places" class="btn btn-dark">Favorite Places!</a>
+
+    </div>
+    <div class="col">
+
+    </div>
+
+</div>
+{{!-- /:user_id/fav-places --}}

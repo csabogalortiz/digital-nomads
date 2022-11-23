@@ -1,9 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const Place = require('./../models/Place.model');
 
 //  Map 
 router.get('/places', (req, res, next) => {
-    res.render('explore/map')
+    console.log('llega algo aquii?????', req.query)
+    Place
+        .find(req.query)
+        .then(places => {
+            res.render('explore/map', { user: req.session.currentUser._id, places })
+        })
+        .catch(err => console.log(err))
 })
 
 

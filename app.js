@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     if (req.session.currentUser) {
         app.locals.userName = req.session.currentUser.username
         app.locals.id = req.session.currentUser._id
-        console.log(app.locals.userName, 'soy el usuario conectado')
+        // console.log(app.locals.userName, 'soy el usuario conectado')
     } else {
         app.locals.userName = null
         app.locals.id = null

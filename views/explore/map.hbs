@@ -20,6 +20,30 @@
 </div>
 
 
+<div>
+    <h1>Place list</h1>
+
+
+    {{#each places}}
+
+    <h3>{{name}}</h3>
+    <h4>Type: {{type}}</h4>
+</div>
+<div>
+    <a href="/places/edit/{{id}}" class="btn btn-dark">Edit Place</a>
+
+
+    <form action="/user/{{../user}}/fav-places/{{id}}" method="POST">
+        <input type="submit" value="Save Place" class="btn btn-info">
+    </form>
+
+</div>
+
+</div>
+
+{{/each}}
+</div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/exploreMap.js"></script>
@@ -27,18 +51,3 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJjUzeG0WQ_oEe9YaRoUNWI-lhWdPB4oE&callback=initMap"></script>
 
 <ul id="places"></ul>
-
-<script>
-
-
-    fetch('https://maps.googleapis.com/maps/api/js?key=AIzaSyAJjUzeG0WQ_oEe9YaRoUNWI-lhWdPB4oE&callback=initMap?type=Focus')
-        .then(res => res.json())
-        .then(coastersArray => {
-            let code = ''
-            coastersArray.forEach(elm => code += `<li>${elm.name}</li>`)
-            document.querySelector('#places').innerHTML = code
-        })
-        .catch(err => console.log(err))
-
-
-</script>
