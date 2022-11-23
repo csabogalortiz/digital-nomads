@@ -61,11 +61,9 @@ router.post("/edit/:id", uploader.single('imageField'), (req, res, next) => {
 
     const { id: place_id } = req.params
     const { name, type, description } = req.body
-    console.log({ name, type, description })
-    console.log(req.body)
 
     Place
-        .findByIdAndUpdate(place_id, { name, type, description })
+        .findByIdAndUpdate(place_id, { name, type, description, placeImg: req.file.path })
         .then(() => {
             res.redirect('/places/list')
         })
