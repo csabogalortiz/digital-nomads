@@ -13,7 +13,7 @@ router.get('/users-list', (req, res, next) => {
         .then(nomads => {
             res.render('user/users-list', { nomads })
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 //Nomad Profile
@@ -30,11 +30,10 @@ router.get('/profile/:user_id', (req, res, next) => {
             res.render('user/profile', {
                 nomad,
                 isADMIN: req.session.currentUser.role === 'ADMIN',
-                isAA: req.session.currentUser.role === 'AA',
                 isNOMAD: req.session.currentUser.role === 'NOMAD'
             })
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 // Edit Nomad (render)
 router.get('/profile/:user_id/edit', (req, res, next) => {
@@ -46,7 +45,7 @@ router.get('/profile/:user_id/edit', (req, res, next) => {
         .then(nomad => {
             res.render('user/edit-user-profile', nomad)
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 // // // Edit Nomad (handle)
 router.post('/profile/:user_id/edit', uploader.single('imageField'), (req, res, next) => {
@@ -55,9 +54,9 @@ router.post('/profile/:user_id/edit', uploader.single('imageField'), (req, res, 
     const { user_id } = req.params
     // console.log('soy edit', req.body)
     User
-        .findByIdAndUpdate(user_id, { name, username, email, profileImg: req.file.path, bio, links, savedPlaces })
+        .findByIdAndUpdate(user_id, { name, username, email, bio, links, savedPlaces, profileImg })
         .then(() => res.redirect(`/user/profile/${user_id}`))
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 //Delete Nomad (handle)
 router.post('/profile/:user_id/delete', (req, res, next) => {
@@ -66,7 +65,7 @@ router.post('/profile/:user_id/delete', (req, res, next) => {
     User
         .findByIdAndDelete(user_id)
         .then(() => res.redirect('/'))
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 // Fav Places
@@ -81,7 +80,7 @@ router.get('/:user_id/fav-places', (req, res, next) => {
             console.log(nomad)
             res.render('user/fav', nomad)
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 
 
 })
@@ -92,6 +91,7 @@ router.post('/:user_id/fav-places/:place_id', (req, res, next) => {
     User
         .findByIdAndUpdate(user_id, { "$addToSet": { "favPlaces": place_id } })
         .then(() => res.redirect('/places/list'))
+        .catch(error => { next(error) })
 })
 
 

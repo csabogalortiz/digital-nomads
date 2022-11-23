@@ -2,18 +2,38 @@ const express = require('express');
 const router = express.Router();
 const uploader = require('./../config/uploader.config')
 const { findByIdAndUpdate, findByIdAndDelete } = require("../models/Place.model")
+const { isLoggedIn } = require('./../middleware/route-guard');
 const Place = require('../models/Place.model')
 
 // Place list - Toca hacerlo diferente por el tema de la api 
 
 router.get('/list', (req, res, next) => {
     // res.send("Place List goes here")
+
     Place
         .find()
         .then(places => {
-            res.render("places/list", { places })
+            res.render("places/list", {
+                places,
+                isADMIN: req.session.currentUser.role === 'ADMIN'
+            })
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
+})
+
+
+
+
+router.get('/details/:id', (req, res, next) => {
+
+    const { id: place_id } = req.params
+
+    Place
+        .findById(place_id)
+        .then(place => {
+            res.render('places/details', place)
+        })
+        .catch(error => { next(error) })
 })
 
 
@@ -37,7 +57,7 @@ router.post('/create', uploader.single('imageField'), (req, res, next) => {
         .then(() => {
             res.redirect('/explore/places')
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 
@@ -52,7 +72,7 @@ router.get("/edit/:id", (req, res, next) => {
         .then(place => {
             res.render('places/edit', place)
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 // Edit Place - Form - (handle)
@@ -60,14 +80,14 @@ router.get("/edit/:id", (req, res, next) => {
 router.post("/edit/:id", uploader.single('imageField'), (req, res, next) => {
 
     const { id: place_id } = req.params
-    const { name, type, description } = req.body
+    const { name, type, description, placeImg } = req.body
 
     Place
-        .findByIdAndUpdate(place_id, { name, type, description, placeImg: req.file.path })
+        .findByIdAndUpdate(place_id, { name, type, description, placeImg })
         .then(() => {
             res.redirect('/places/list')
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 // Delete 
@@ -83,7 +103,7 @@ router.post('/delete/:id', (req, res, next) => {
             res.redirect('/places/list')
 
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 // Owned place list
@@ -96,7 +116,7 @@ router.get('/my-places', isLoggedIn, (req, res) => {
         .then(places => {
             res.render('places/my-places', { places })
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 

@@ -15,7 +15,7 @@ router.get('/places', (req, res, next) => {
             res.json(places)
         })
 
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 

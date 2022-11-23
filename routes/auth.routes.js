@@ -22,7 +22,7 @@ router.post("/sign-up", isLoggedOut, uploader.single("imageField"), (req, res, n
         .then(salt => bcryptjs.hash(password, salt))
         .then(hashedPassword => User.create({ name, username, email, bio, links, savedPlaces, profileImg: req.file.path, password: hashedPassword }))
         .then(() => res.redirect('/'))
-        .catch(error => next(error))
+        .catch(error => { next(error) })
 
 })
 
@@ -54,7 +54,7 @@ router.post("/log-in", isLoggedOut, (req, res, next) => {
                 res.redirect('/home')
             }
         })
-        .catch(error => next(error))
+        .catch(error => { next(error) })
 })
 
 // Logout

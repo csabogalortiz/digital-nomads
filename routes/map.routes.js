@@ -10,7 +10,7 @@ router.get('/places', (req, res, next) => {
         .then(places => {
             res.render('explore/map', { user: req.session.currentUser._id, places })
         })
-        .catch(err => console.log(err))
+        .catch(error => { next(error) })
 })
 
 

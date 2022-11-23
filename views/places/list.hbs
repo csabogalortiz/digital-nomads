@@ -17,13 +17,21 @@
                 </div>
                 <div class="row">
                     {{!-- <a href="XXXXX" class="btn btn-dark">Check Details</a> --}}
-                    <a href="/places/edit/{{id}}" class="btn btn-dark">Edit Place</a>
                 </div>
             </div>
+            <a href="/places/details/{{id}}" class="btn btn-dark">Details</a>
+
+
+            {{#if ../isADMIN}}
+            <a href="/places/edit/{{id}}" class="btn btn-dark">Edit Place</a>
             <form action="/places/delete/{{id}}" method="POST">
                 <input type="submit" value="Delete" class="btn btn-danger">
             </form>
+            {{/if}}
+
+
             {{/each}}
+
 
 
 

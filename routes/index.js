@@ -1,4 +1,7 @@
-module.exports = app => {
+const setNavbar = require("../middleware/navbar")
+module.exports = (app) => {
+
+    app.use(setNavbar)
 
     const indexRoutes = require("./index.routes");
     app.use("/", indexRoutes);
