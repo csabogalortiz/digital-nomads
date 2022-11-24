@@ -4,11 +4,28 @@ const Place = require('./../models/Place.model');
 
 //  Map 
 router.get('/places', (req, res, next) => {
-    console.log('llega algo aquii?????', req.query)
+
+    const favs = req.session.currentUser.favPlaces
+
     Place
-        .find(req.query)
+        .find()
         .then(places => {
-            res.render('explore/map', { user: req.session.currentUser._id, places })
+
+            const formattedPlaces = places.map(elm => {
+
+                const stringID =
+
+                    console.log(elm._id.toString())
+                console.log(favs)
+                console.log(favs.includes(elm._id.toString()))
+                console.log('------')
+
+                return { ...elm._doc, isFav: false }
+            })
+
+            console.log('----------', formattedPlaces)
+
+            res.render('explore/map', { user: req.session.currentUser._id, places: formattedPlaces })
         })
         .catch(error => { next(error) })
 })
