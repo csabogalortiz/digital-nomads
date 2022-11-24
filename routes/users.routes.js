@@ -102,6 +102,7 @@ router.post('/:user_id/fav-places/:place_id', (req, res, next) => {
 
     User
         .findByIdAndUpdate(user_id, { "$addToSet": { "favPlaces": place_id } })
+        // console.log('hola', place_id)
         .then(() => res.redirect('/explore/places'))
 })
 

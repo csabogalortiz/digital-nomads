@@ -6,6 +6,8 @@ const saltRounds = 10
 const bcryptjs = require('bcryptjs')
 const { isLoggedOut } = require('./../middleware/route-guard');
 
+
+
 // Signup
 
 router.get("/sign-up", isLoggedOut, (req, res, next) => {

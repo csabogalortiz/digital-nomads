@@ -1,33 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const Place = require('./../models/Place.model');
+const User = require('../models/User.model')
 
 //  Map 
 router.get('/places', (req, res, next) => {
 
-    const favs = req.session.currentUser.favPlaces
+    const currentUserId = req.session.currentUser._id
+    User.findById(currentUserId).then(userData => {
+        const favs = userData.favPlaces
 
-    Place
-        .find()
-        .then(places => {
+        Place
+            .find()
+            .then(places => {
 
-            const formattedPlaces = places.map(elm => {
-
-                const stringID =
-
-                    console.log(elm._id.toString())
-                console.log(favs)
-                console.log(favs.includes(elm._id.toString()))
-                console.log('------')
-
-                return { ...elm._doc, isFav: false }
+                const formattedPlaces = places.map(elm => {
+                    console.log(elm._id)
+                    return { ...elm._doc, isFav: favs.includes(elm._id.toString()) }
+                })
+                res.render('explore/map', { user: req.session.currentUser._id, places: formattedPlaces })
             })
+            .catch(error => { next(error) })
+    })
 
-            console.log('----------', formattedPlaces)
-
-            res.render('explore/map', { user: req.session.currentUser._id, places: formattedPlaces })
-        })
-        .catch(error => { next(error) })
 })
 
 

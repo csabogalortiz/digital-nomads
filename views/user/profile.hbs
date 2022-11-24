@@ -3,9 +3,10 @@
     <div class="col">
         <h1 class=" profileTitles"> {{nomad.username}}</h1>
         <p>{{nomad.bio}}</p>
-        <a href="/places/my-places" class="btn btn-dark">Your Places!</a>
         <a href="/user/{{id}}/fav-places" class="btn btn-dark">Favorite Places!</a>
         <a href="/user/{{id}}/friend-list" class="btn btn-dark">Friends</a>
+        <a href="/user/profile/{{id}}/edit" class="btn btn-dark">Edit Profile</a>
+
         <div>
             {{#each nomad.favPlaces}}
             <h1>{{name}}</h1>

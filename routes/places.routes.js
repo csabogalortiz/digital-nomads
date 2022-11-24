@@ -4,7 +4,6 @@ const uploader = require('./../config/uploader.config')
 const { findByIdAndUpdate, findByIdAndDelete } = require("../models/Place.model")
 const { isLoggedIn } = require('./../middleware/route-guard');
 const Place = require('../models/Place.model')
-const { isLoggedIn } = require('./../middleware/route-guard');
 const User = require('../models/User.model')
 
 // Place list - Toca hacerlo diferente por el tema de la api 
