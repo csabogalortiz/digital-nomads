@@ -47,30 +47,11 @@ h1 {
 
 /* Gallery  */
 
-#containerg {
-  width: 100%;
-  max-width: 1000px;
-  margin: 2em auto;
-}
 
-.box {
-  margin-bottom: 20px;
-  height: 200px;
-  background: #BFBFBF;
-  border-radius: 10px;
-}
 
-.cols {
-  -moz-column-count: 6;
-  -moz-column-gap: 3%;
-  -moz-column-width: 30%;
-  -webkit-column-count: 6;
-  -webkit-column-gap: 3%;
-  -webkit-column-width: 30%;
-  column-count: 4;
-  column-gap: 3%;
-  column-width: 30%;
-}
+
+
+
 
 /* Profile */
 
