@@ -25,7 +25,6 @@ const userSchema = new Schema({
 
   bio: {
     type: String,
-    default: 'Hi! Im a Digital Nomad'
   },
 
   links: [{
@@ -49,7 +48,14 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Place',
     }
-  ]
+  ],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    }
+  ],
+
 },
 
   {

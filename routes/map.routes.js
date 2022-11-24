@@ -32,6 +32,6 @@ router.get('/places', (req, res, next) => {
 
 
 
-
 module.exports = router
+
 

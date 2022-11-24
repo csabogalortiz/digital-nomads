@@ -1,20 +1,84 @@
 body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(145deg, rgba(0, 0, 0, 1) 0%, rgba(49, 47, 52, 1) 100%);
+  font-family: 'Work Sans', 'Extra-bold', sans-serif;
+  color: white;
 }
 
-a {
-  color: #00b7ff;
-}
 
 h1 {
   color: 15px;
 }
 
 #exploreMap {
-  height: 400px;
+  height: 600px;
   background-color: red;
 }
+
+/* InfoWindow */
+
+/* #infoBack {
+  background-color: black;
+  color: aliceblue
+} */
+
+/* Initial Form */
+.initialForm {
+  padding: 150px;
+  padding-bottom: 250px;
+  background-color: black;
+}
+
+.initialFont {
+  width: 387.49px;
+  height: 129.9px;
+  left: 128px;
+  top: 292px;
+
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 550;
+  font-size: 40px;
+  line-height: 83px;
+}
+
+
+/* Gallery  */
+
+
+
+
+
+
+
+/* Profile */
+
+.profilePic {
+
+  border-radius: 40px;
+  width: 50%;
+}
+
+.profileTitles {
+
+  width: 387.49px;
+  height: 129.9px;
+  left: 128px;
+  top: 292px;
+
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 70.4523px;
+  line-height: 83px;
+}
+
+.placeImg {
+  width: 50%;
+}
+
 
 /* #initialForm {
 
@@ -24,7 +88,10 @@ h1 {
 .initialForm {
   padding: 150px;
   padding-bottom: 250px;
+  background-color: black;
 }
+
+
 
 .welcomeMessage {
   padding-left: 90px;

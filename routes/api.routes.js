@@ -6,12 +6,9 @@ router.get('/places', (req, res, next) => {
 
     const { type } = req.query
 
-    // console.log('------', type)
-
     Place
         .find({ type })
         .then(places => {
-            // console.log('que cojones llegas aquiiiS', places)
             res.json(places)
         })
 
@@ -19,7 +16,4 @@ router.get('/places', (req, res, next) => {
 })
 
 
-
-
 module.exports = router
-

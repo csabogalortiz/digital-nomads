@@ -1,14 +1,38 @@
-<div class="row align-items-center">
+<div class="container row align-items-center">
 
     <div class="col">
-        <h1> Welcome {{nomad.username}}</h1>
+        <h1 class=" profileTitles"> {{nomad.username}}</h1>
+        <p>{{nomad.bio}}</p>
         <a href="/places/my-places" class="btn btn-dark">Your Places!</a>
         <a href="/user/{{id}}/fav-places" class="btn btn-dark">Favorite Places!</a>
+        <a href="/user/{{id}}/friend-list" class="btn btn-dark">Friends</a>
+        <div>
+            {{#each nomad.favPlaces}}
+            <h1>{{name}}</h1>
+            {{/each}}
+
+
+        </div>
+
+        <div>
+            {{#each nomad.friends}}
+            <h1>{{username}}</h1>
+
+            {{/each}}
+
+        </div>
+
+        <div>
+            {{#each nomad.createdPlaces}}
+            <h1>{{name}}</h1>
+
+            {{/each}}
+
+        </div>
+
 
     </div>
     <div class="col">
-
+        <img class="profilePic" src="{{nomad.profileImg}}" alt="{{title}}">
     </div>
-
-</div>
-{{!-- /:user_id/fav-places --}}
+    {{!-- /:user_id/fav-places --}}
