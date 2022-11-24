@@ -10,13 +10,13 @@ const placeSchema = new Schema({
 
   type: {
     type: String,
-    enum: ['focus', 'network', 'chill']
+    enum: ['focus', 'networking', 'chill']
   },
 
 
   decription: {
     type: String,
-    required: false
+    default: "Default Description"
   },
 
   location: {
@@ -33,6 +33,11 @@ const placeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+
+  comment: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment',
+  }],
 },
   {
     timestamps: true
